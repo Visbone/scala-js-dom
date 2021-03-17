@@ -2,6 +2,11 @@
 *.class
 *.log
 *~
+/.bloop
+/.metals
+/project/.bloop
+/project/project/.bloop
+metals.sbt
 
 # sbt specific
 dist/*
