@@ -8,18 +8,40 @@ def Main =
         j <- 1 to 10
     do 
         println( (i, j) ) 
-    tools
+    Graphics.start
+
+def loop = 
+    Graphics.fillRectangle(10,10,50,50)
 
 
-import scala.scalajs.js
 
-object tools:
+
+object Graphics:
+    import scala.scalajs.js
     val document = js.Dynamic.global.document
     val window = js.Dynamic.global.window
     val canvas = document.getElementById("canvas")
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
     var ctx = canvas.getContext("2d")
-    ctx.beginPath();
-    ctx.rect(20, 20, 150, 100)
-    ctx.stroke()
+    
+    var x = 0
+    var y = 0
+    def start = js.timers.setInterval(10){
+        loop
+    }
+    def setColor(red:Int,green:Int,blue:Int):Unit = 
+        setColor(s"rgb($red, $green, $blue)")
+    
+    def setColor(color:String):Unit = 
+        ctx.fillStyle = color
+    
+    def clear:Unit = 
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+    def fillCircle(x:Int,y:Int,radius:Int) = 
+        ctx.beginPath()
+        ctx.arc(x, y, radius, 0, 2 * Math.PI, false)
+        ctx.fill()
+    def fillRectangle(x:Int,y:Int,width:Int,height:Int) = 
+        ctx.fillRect(x,y,width,height)
+    
